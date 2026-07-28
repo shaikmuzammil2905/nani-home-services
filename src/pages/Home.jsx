@@ -19,13 +19,6 @@ const Home = () => {
     'appliance-cleaning': Tv
   };
 
-  const houseCleaningRows = [
-    { type: '1BHK', empty: '₹3,500', occupied: '₹5,000' },
-    { type: '2BHK', empty: '₹6,000', occupied: '₹8,000' },
-    { type: '3BHK', empty: '₹7,500', occupied: '₹9,500' },
-    { type: '4BHK', empty: '₹10,000', occupied: '₹14,000' }
-  ];
-
   return (
     <div className="space-y-16 pb-12">
       
@@ -160,14 +153,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* PRICING HIGHLIGHTS SECTION ("1. FULL HOUSE CLEANING") */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PricingTable 
-          title="1. FULL HOUSE CLEANING" 
-          rows={houseCleaningRows} 
-          extraNote="Deep cleaning • Dusting • Mopping • Kitchen • Bathrooms • Balcony • Windows & more"
-        />
-      </section>
+
 
       {/* WHY CHOOSE NANI CLEANING SERVICE? (Matches dark navy card in image copy 2.png) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
