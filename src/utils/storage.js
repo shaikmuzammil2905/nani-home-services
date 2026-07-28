@@ -10,14 +10,18 @@ const KEYS = {
   ADMIN_AUTH: 'nani_admin_auth'
 };
 
-// Initialize default storage if empty
+// Initialize default storage or update portfolio if expanded
 export const initStorage = () => {
   if (!localStorage.getItem(KEYS.SERVICES)) {
     localStorage.setItem(KEYS.SERVICES, JSON.stringify(servicesData));
   }
-  if (!localStorage.getItem(KEYS.GALLERY)) {
+  
+  // Update gallery if existing stored gallery has fewer items than current initialPortfolio
+  const storedGal = localStorage.getItem(KEYS.GALLERY);
+  if (!storedGal || JSON.parse(storedGal).length < initialPortfolio.length) {
     localStorage.setItem(KEYS.GALLERY, JSON.stringify(initialPortfolio));
   }
+
   if (!localStorage.getItem(KEYS.TEAM)) {
     localStorage.setItem(KEYS.TEAM, JSON.stringify(teamMembers));
   }
