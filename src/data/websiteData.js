@@ -244,22 +244,22 @@ export const initialPortfolio = [
     id: 1, 
     title: "OVERHEAD WATER TANK CLEANING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80",
-    desc: "Zet Wash high pressure jet cleaning for Sintex overhead water tank."
+    image: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=800&q=80",
+    desc: "High pressure jet washing and chemical descaling for Sintex overhead water tank."
   },
   { 
     id: 2, 
     title: "UNDERGROUND SUMP DEEP CLEANING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
-    desc: "Sludge extraction & UV sanitization for residential water sump."
+    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+    desc: "Sludge extraction & antibacterial UV sanitization for residential water sump."
   },
   { 
     id: 3, 
     title: "COMMERCIAL TANK WASHING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
-    desc: "10,000L+ Commercial water tank vacuum & chemical wash."
+    image: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=800&q=80",
+    desc: "10,000L+ Commercial water tank vacuum & high-pressure jet wash."
   },
 
   // FLOOR CLEANING
@@ -327,7 +327,7 @@ export const initialPortfolio = [
     id: 12, 
     title: "MATTRESS STERILIZATION", 
     category: "Sofa", 
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80",
     desc: "UV steam cleaning for double bed mattress."
   },
 

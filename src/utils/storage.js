@@ -16,11 +16,8 @@ export const initStorage = () => {
     localStorage.setItem(KEYS.SERVICES, JSON.stringify(servicesData));
   }
   
-  // Update gallery if existing stored gallery has fewer items than current initialPortfolio
-  const storedGal = localStorage.getItem(KEYS.GALLERY);
-  if (!storedGal || JSON.parse(storedGal).length < initialPortfolio.length) {
-    localStorage.setItem(KEYS.GALLERY, JSON.stringify(initialPortfolio));
-  }
+  // Refresh gallery with updated initialPortfolio
+  localStorage.setItem(KEYS.GALLERY, JSON.stringify(initialPortfolio));
 
   if (!localStorage.getItem(KEYS.TEAM)) {
     localStorage.setItem(KEYS.TEAM, JSON.stringify(teamMembers));

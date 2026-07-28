@@ -57,10 +57,14 @@ const Gallery = () => {
               onClick={() => setModalImage(item)}
               className="group relative bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 cursor-pointer transform hover:-translate-y-1.5 hover:shadow-2xl transition duration-300 flex flex-col justify-between"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-slate-100">
                 <img 
                   src={item.image} 
                   alt={item.title} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80";
+                  }}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                 />
                 <span className="absolute top-4 left-4 bg-brand-navy/90 text-brand-green text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur shadow">
