@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #031B4E;
+}
+::-webkit-scrollbar-thumb {
+  background: #16A34A;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22C55E;
+}
+
+/* Glassmorphism */
+.glass-nav {
+  background: rgba(3, 27, 78, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-dark {
+  background: rgba(4, 30, 66, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Shimmer & Glow Effects */
+.glow-effect-green {
+  box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
+}
+
+.glow-effect-blue {
+  box-shadow: 0 0 20px rgba(11, 94, 215, 0.4);
+}
+
+.diamond-divider::before, .diamond-divider::after {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background-color: #16A34A;
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+/* Button Animations */
+.btn-primary-blue {
+  background: linear-gradient(135deg, #031B4E 0%, #0B5ED7 100%);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary-blue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(11, 94, 215, 0.4);
+}
+
+.btn-primary-green {
+  background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.45);
+}
