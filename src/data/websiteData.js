@@ -122,7 +122,7 @@ export const servicesData = [
     shortTitle: "Watertank Cleaning",
     iconName: "Droplets",
     badge: "Zet Wash Tech",
-    heroImage: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80",
+    heroImage: "/assets/watertank_hero.png",
     description: "6-stage high-pressure Zet Wash machine cleaning for overhead RCC tanks, plastic Sintex tanks, and underground sumps.",
     features: [
       "Dewatering & sludge extraction",
@@ -147,7 +147,7 @@ export const servicesData = [
     shortTitle: "Sofa & Carpet Cleaning",
     iconName: "Armchair",
     badge: "Steam & Foam",
-    heroImage: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
+    heroImage: "/assets/sofa_shampoo.png",
     description: "Professional dry vacuuming, deep foam scrubbing, and high-temperature steam extraction for sofas, carpets, and mattresses.",
     features: [
       "Deep fabric vacuuming to remove hidden dust & mites",
@@ -182,7 +182,7 @@ export const servicesData = [
     shortTitle: "Appliance Cleaning",
     iconName: "Tv",
     badge: "Detail Scrub",
-    heroImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+    heroImage: "/assets/kitchen_cabinet.png",
     description: "Specialized deep cleaning for kitchen appliances, refrigerators, fans, chimneys, dining tables, and mirrors.",
     features: [
       "Internal & external shelf disinfection",
@@ -211,13 +211,41 @@ export const servicesData = [
     ]
   },
   {
+    id: "floor-deep-cleaning",
+    slug: "floor-deep-cleaning",
+    title: "7. Floor Deep Cleaning Services",
+    shortTitle: "Floor Deep Cleaning",
+    iconName: "Layers",
+    badge: "Machine Scrubbing",
+    heroImage: "/assets/floor_industrial.png",
+    description: "Professional high-speed single disc machine scrubbing, marble & tile polishing, tough stain removal, grout joint descaling, and antibacterial floor sealing.",
+    features: [
+      "High-speed single disc machine scrubbing",
+      "Marble, granite, vitrified tile & epoxy floor polishing",
+      "Deep grout joint & dirt build-up extraction",
+      "Chemical hard water stain & paint splatter removal",
+      "Anti-bacterial floor sanitization & protective seal"
+    ],
+    benefits: [
+      "Restores original glossy shine of marble & tiles",
+      "Removes years of embedded dirt, oil, and stains",
+      "100% scratch-free & safe chemical formula",
+      "Dries quickly with long-lasting surface protection"
+    ],
+    pricingCards: [
+      { name: "Floor Machine Scrubbing", price: "₹7 per sq.ft", highlight: "Depends on floor condition & square area" },
+      { name: "Marble & Tile Polishing", price: "₹12 per sq.ft", highlight: "Deep buffing & high-gloss mirror polish" },
+      { name: "Deep Grout & Joint Cleaning", price: "₹8 per sq.ft", highlight: "Heavy chemical grout whitening" }
+    ]
+  },
+  {
     id: "window-cleaning",
     slug: "window-cleaning",
-    title: "7. Window Cleaning",
+    title: "8. Window Cleaning",
     shortTitle: "Window Cleaning",
     iconName: "Maximize",
     badge: "Crystal Clear",
-    heroImage: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80",
+    heroImage: "/assets/window_streakfree.png",
     description: "Streak-free glass panel washing, track scrubbing, mesh cleaning, and high-level cobweb dusting.",
     features: [
       "Glass pane squeegee washing",
@@ -244,21 +272,21 @@ export const initialPortfolio = [
     id: 1, 
     title: "OVERHEAD WATER TANK CLEANING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/tank_overhead.png",
     desc: "High pressure jet washing and chemical descaling for Sintex overhead water tank."
   },
   { 
     id: 2, 
     title: "UNDERGROUND SUMP DEEP CLEANING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/tank_sump.png",
     desc: "Sludge extraction & antibacterial UV sanitization for residential water sump."
   },
   { 
     id: 3, 
     title: "COMMERCIAL TANK WASHING", 
     category: "Water Tank", 
-    image: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/tank_commercial.png",
     desc: "10,000L+ Commercial water tank vacuum & high-pressure jet wash."
   },
 
@@ -267,21 +295,21 @@ export const initialPortfolio = [
     id: 4, 
     title: "INDUSTRIAL FLOOR SCRUBBING", 
     category: "Floor Cleaning", 
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/floor_industrial.png",
     desc: "Single disc floor scrubbing machine operation on marble tiles."
   },
   { 
     id: 5, 
     title: "MARBLE & TILE POLISHING", 
     category: "Floor Cleaning", 
-    image: "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/floor_polishing.png",
     desc: "Stain removal and high-gloss floor polishing."
   },
   { 
     id: 6, 
     title: "DEEP TILED FLOOR SANITIZATION", 
     category: "Floor Cleaning", 
-    image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/floor_sanitization.png",
     desc: "Grout joint cleaning & anti-bacterial floor mopping."
   },
 
@@ -290,21 +318,21 @@ export const initialPortfolio = [
     id: 7, 
     title: "STREAK-FREE WINDOW WASHING", 
     category: "Window Cleaning", 
-    image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/window_streakfree.png",
     desc: "Squeegee washing & glass pane stain removal."
   },
   { 
     id: 8, 
     title: "BALCONY GLASS PANEL CLEANING", 
     category: "Window Cleaning", 
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/window_balcony.png",
     desc: "Dust & cobweb vacuuming from window tracks."
   },
   { 
     id: 9, 
     title: "HIGH-RISE WINDOW GLASS CLEANING", 
     category: "Window Cleaning", 
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/window_highrise.png",
     desc: "Exterior window frame & mosquito mesh cleaning."
   },
 
@@ -313,21 +341,21 @@ export const initialPortfolio = [
     id: 10, 
     title: "SOFA SHAMPOOING & STEAM CLEANING", 
     category: "Sofa", 
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/sofa_shampoo.png",
     desc: "Deep foam extraction for 5-seater fabric sofa."
   },
   { 
     id: 11, 
     title: "CARPET DEEP VACUUMING", 
     category: "Sofa", 
-    image: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/carpet_vacuum.png",
     desc: "Heavy duty carpet washing and spot treatment."
   },
   { 
     id: 12, 
     title: "MATTRESS STERILIZATION", 
     category: "Sofa", 
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/mattress_sterilization.png",
     desc: "UV steam cleaning for double bed mattress."
   },
 
@@ -336,14 +364,14 @@ export const initialPortfolio = [
     id: 13, 
     title: "KITCHEN DEGREASING & CLEANING", 
     category: "Kitchen", 
-    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/kitchen_degreasing.png",
     desc: "Oil stain removal from chimney, stove & wall tiles."
   },
   { 
     id: 14, 
     title: "CABINET & COUNTERTOP POLISH", 
     category: "Kitchen", 
-    image: "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/kitchen_cabinet.png",
     desc: "Disinfection of kitchen sink and modular drawers."
   },
 
@@ -352,14 +380,14 @@ export const initialPortfolio = [
     id: 15, 
     title: "BATHROOM HARD WATER DESCALING", 
     category: "Bathroom", 
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/bathroom_descaling.png",
     desc: "Limescale removal from shower taps, tub & tile walls."
   },
   { 
     id: 16, 
     title: "COMMODE & BASIN STERILIZATION", 
     category: "Bathroom", 
-    image: "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/bathroom_sanitization.png",
     desc: "99.9% germ elimination with non-corrosive chemicals."
   },
 
@@ -368,14 +396,14 @@ export const initialPortfolio = [
     id: 17, 
     title: "FULL HOUSE 3BHK DEEP CLEAN", 
     category: "Residential", 
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/house_full3bhk.png",
     desc: "Comprehensive move-in cleaning for villa."
   },
   { 
     id: 18, 
     title: "COMMERCIAL OFFICE SANITIZATION", 
     category: "Commercial", 
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/commercial_office.png",
     desc: "Workspace desk & carpet deep cleaning."
   }
 ];

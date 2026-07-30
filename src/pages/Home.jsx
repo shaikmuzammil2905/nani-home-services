@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, CheckCircle2, Phone, Calendar, ArrowRight, Home as HomeIcon, 
-  Utensils, Bath, Droplets, Armchair, Tv, Sparkles, Star, Users, Award, Clock
+  Utensils, Bath, Droplets, Armchair, Tv, Sparkles, Star, Users, Award, Clock, Layers, Maximize
 } from 'lucide-react';
 import { businessDetails, servicesData, initialPortfolio, statsCounterData, testimonials } from '../data/websiteData';
 import PricingTable from '../components/PricingTable';
@@ -16,13 +16,15 @@ const Home = () => {
     'bathroom-cleaning': Bath,
     'water-tank-cleaning': Droplets,
     'sofa-carpet-cleaning': Armchair,
-    'appliance-cleaning': Tv
+    'appliance-cleaning': Tv,
+    'floor-deep-cleaning': Layers,
+    'window-cleaning': Maximize
   };
 
   return (
     <div className="space-y-16 pb-12">
       
-      {/* HERO BANNER SECTION (Matches image copy 2.png) */}
+      {/* HERO BANNER SECTION (Matches image copy 2.png & updated requests) */}
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-lightBlue/50 via-white to-slate-50 pt-10 pb-16 lg:py-20 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -35,10 +37,12 @@ const Home = () => {
                 <span>PROFESSIONAL</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy leading-tight font-heading">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight font-heading">
                 PROFESSIONAL <br />
                 <span className="text-brand-green">HOME CLEANING</span> <br />
-                YOU CAN TRUST
+                <span className="text-2xl sm:text-3xl lg:text-4xl text-brand-navy block mt-1 uppercase tracking-wide">
+                  Experience Our Professional Touch
+                </span>
               </h1>
 
               <p className="text-slate-600 text-base sm:text-lg max-w-xl font-normal leading-relaxed">
@@ -46,7 +50,7 @@ const Home = () => {
               </p>
 
               {/* Bullet points with checkmarks */}
-              <div className="space-y-2.5 pt-2">
+              <div className="space-y-2.5 pt-1">
                 {[
                   "Trained & Verified Professionals",
                   "Eco-Friendly Cleaning Products",
@@ -59,6 +63,47 @@ const Home = () => {
                     <span>{item}</span>
                   </div>
                 ))}
+              </div>
+
+              {/* Animated HD Feature Cards (image copy 8.png & 9.png fit in marked spot) */}
+              <div className="pt-2 grid grid-cols-2 gap-3 sm:gap-4 max-w-lg">
+                <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl border-2 border-brand-green/40 bg-white hover:border-brand-green transition-all duration-500 transform hover:-translate-y-1">
+                  <div className="relative h-28 sm:h-36 overflow-hidden">
+                    <img 
+                      src="/assets/hero_floor_scrubbing.png" 
+                      alt="Industrial Machine Floor Scrubbing" 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <span className="absolute top-2 left-2 bg-brand-green text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider shadow">
+                      Zet Wash Tech
+                    </span>
+                  </div>
+                  <div className="p-2 sm:p-2.5 bg-brand-navy text-white text-left">
+                    <p className="text-[11px] sm:text-xs font-extrabold leading-tight text-emerald-300">
+                      Machine Floor Scrubbing
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl border-2 border-brand-royalBlue/40 bg-white hover:border-brand-royalBlue transition-all duration-500 transform hover:-translate-y-1">
+                  <div className="relative h-28 sm:h-36 overflow-hidden">
+                    <img 
+                      src="/assets/hero_bathroom_sanitization.png" 
+                      alt="Deep Bathroom Sanitization" 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <span className="absolute top-2 left-2 bg-brand-royalBlue text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider shadow">
+                      Sanitized
+                    </span>
+                  </div>
+                  <div className="p-2 sm:p-2.5 bg-brand-navy text-white text-left">
+                    <p className="text-[11px] sm:text-xs font-extrabold leading-tight text-blue-300">
+                      Deep Sanitization Specialist
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Action Buttons */}
@@ -95,7 +140,7 @@ const Home = () => {
                 {/* Main Hero Image */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                   <img
-                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80"
+                    src="/assets/floor_industrial.png"
                     alt="NANI CLEANING SERVICES Professional Cleaning"
                     className="w-full h-[380px] sm:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
                   />
@@ -121,7 +166,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* OUR SERVICES SECTION (Matches image copy 2.png) */}
+      {/* OUR SERVICES SECTION (Matches image copy 2.png & copy 10.png) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
@@ -131,20 +176,20 @@ const Home = () => {
           <div className="text-brand-green text-lg font-bold diamond-divider my-1">✦</div>
         </div>
 
-        {/* 6 Services Grid Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-          {servicesData.slice(0, 6).map((service, index) => {
+        {/* Services Grid Cards (All Services shown) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 sm:gap-5">
+          {servicesData.map((service, index) => {
             const IconComp = serviceIcons[service.slug] || HomeIcon;
             return (
               <Link
                 key={service.id}
                 to={`/services/${service.slug}`}
-                className="group bg-white rounded-2xl p-5 shadow-md hover:shadow-card-hover border border-slate-100 hover:border-brand-green/30 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center"
+                className="group bg-white rounded-2xl p-4 sm:p-5 shadow-md hover:shadow-card-hover border border-slate-100 hover:border-brand-green/40 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center justify-between"
               >
-                <div className="w-16 h-16 rounded-2xl bg-brand-lightBlue group-hover:bg-brand-green text-brand-royalBlue group-hover:text-white flex items-center justify-center transition-all duration-300 mb-4 shadow-sm">
-                  <IconComp className="w-8 h-8" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-lightBlue group-hover:bg-brand-green text-brand-royalBlue group-hover:text-white flex items-center justify-center transition-all duration-300 mb-3 shadow-sm">
+                  <IconComp className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
-                <h3 className="text-sm font-bold text-brand-navy group-hover:text-brand-green transition-colors leading-tight">
+                <h3 className="text-xs sm:text-sm font-extrabold text-brand-navy group-hover:text-brand-green transition-colors leading-snug">
                   {index + 1}. {service.shortTitle}
                 </h3>
               </Link>

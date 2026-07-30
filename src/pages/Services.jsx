@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Maximize, ArrowRight, Check 
+  Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Maximize, Layers, ArrowRight, Check 
 } from 'lucide-react';
 import { servicesData } from '../data/websiteData';
 
@@ -13,6 +13,7 @@ const Services = () => {
     'water-tank-cleaning': Droplets,
     'sofa-carpet-cleaning': Armchair,
     'appliance-cleaning': Tv,
+    'floor-deep-cleaning': Layers,
     'window-cleaning': Maximize
   };
 

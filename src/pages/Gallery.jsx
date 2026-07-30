@@ -8,11 +8,27 @@ const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [modalImage, setModalImage] = useState(null);
 
-  const categories = ['All', 'Water Tank', 'Floor Cleaning', 'Window Cleaning', 'Sofa', 'Kitchen', 'Bathroom', 'Residential', 'Commercial'];
+  const categories = [
+    'All', 
+    'House Cleaning', 
+    'Kitchen', 
+    'Bathroom', 
+    'Sofa & Carpet', 
+    'Floor Cleaning', 
+    'Water Tank', 
+    'Window Cleaning', 
+    'Commercial'
+  ];
 
   const filteredItems = selectedCategory === 'All' 
     ? galleryItems 
-    : galleryItems.filter(item => item.category?.toLowerCase().trim() === selectedCategory.toLowerCase().trim());
+    : galleryItems.filter(item => {
+        const itemCat = item.category?.toLowerCase().trim() || '';
+        const selCat = selectedCategory.toLowerCase().trim();
+        if (selCat === 'house cleaning' && (itemCat.includes('house') || itemCat.includes('residential'))) return true;
+        if (selCat === 'sofa & carpet' && (itemCat.includes('sofa') || itemCat.includes('carpet'))) return true;
+        return itemCat.includes(selCat) || selCat.includes(itemCat);
+      });
 
   return (
     <div className="space-y-12 py-8">
@@ -31,14 +47,14 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Category Filter Tabs (Matching image copy 3.png) */}
+      {/* Category Filter Tabs (Matching UI design) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300 shadow-sm ${
+              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 shadow-sm ${
                 selectedCategory === cat
                   ? 'bg-brand-green text-white shadow-lg shadow-glow-green scale-105'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-brand-green/40'
@@ -57,15 +73,15 @@ const Gallery = () => {
               onClick={() => setModalImage(item)}
               className="group relative bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 cursor-pointer transform hover:-translate-y-1.5 hover:shadow-2xl transition duration-300 flex flex-col justify-between"
             >
-              <div className="relative h-64 overflow-hidden bg-slate-100">
+              <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
                 <img 
                   src={item.image} 
                   alt={item.title} 
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80";
+                    e.target.src = "/assets/floor_industrial.png";
                   }}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                 />
                 <span className="absolute top-4 left-4 bg-brand-navy/90 text-brand-green text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur shadow">
                   {item.category}

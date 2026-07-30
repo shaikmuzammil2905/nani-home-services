@@ -12,11 +12,8 @@ const KEYS = {
 
 // Initialize default storage or update portfolio if expanded
 export const initStorage = () => {
-  if (!localStorage.getItem(KEYS.SERVICES)) {
-    localStorage.setItem(KEYS.SERVICES, JSON.stringify(servicesData));
-  }
-  
-  // Refresh gallery with updated initialPortfolio
+  // Always synchronize latest services & portfolio items
+  localStorage.setItem(KEYS.SERVICES, JSON.stringify(servicesData));
   localStorage.setItem(KEYS.GALLERY, JSON.stringify(initialPortfolio));
 
   if (!localStorage.getItem(KEYS.TEAM)) {
