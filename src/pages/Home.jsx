@@ -49,22 +49,6 @@ const Home = () => {
                 We make your home sparkle clean with our professional touch, eco-friendly cleaning solutions, and advanced machine technology.
               </p>
 
-              {/* Bullet points with checkmarks */}
-              <div className="space-y-2.5 pt-1">
-                {[
-                  "Trained & Verified Professionals",
-                  "Eco-Friendly Cleaning Products",
-                  "100% Satisfaction Guarantee"
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-3 text-slate-800 font-bold text-sm sm:text-base">
-                    <div className="w-5 h-5 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0 shadow">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                    </div>
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
               {/* Animated HD Feature Cards (image copy 8.png & 9.png fit in marked spot) */}
               <div className="pt-2 grid grid-cols-2 gap-3 sm:gap-4 max-w-lg">
                 <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl border-2 border-brand-green/40 bg-white hover:border-brand-green transition-all duration-500 transform hover:-translate-y-1">

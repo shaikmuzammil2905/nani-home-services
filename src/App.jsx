@@ -14,6 +14,7 @@ import Testimonials from './pages/Testimonials';
 import FAQPage from './pages/FAQPage';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
+import PricingPage from './pages/PricingPage';
 import { initStorage } from './utils/storage';
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<ServiceDetail />} />
-              <Route path="/pricing" element={<Home />} />
+              <Route path="/pricing" element={<PricingPage />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/team" element={<Team />} />
               <Route path="/testimonials" element={<Testimonials />} />
