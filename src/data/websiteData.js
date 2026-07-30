@@ -119,7 +119,7 @@ export const servicesData = [
     id: "water-tank-cleaning",
     slug: "water-tank-cleaning",
     title: "4. Water Tank Cleaning Services",
-    shortTitle: "Watertank Cleaning",
+    shortTitle: "Water Tank Cleaning",
     iconName: "Droplets",
     badge: "Zet Wash Tech",
     heroImage: "/assets/watertank_hero.png",
@@ -136,8 +136,12 @@ export const servicesData = [
       "Removes green algae & sediment accumulation"
     ],
     pricingCards: [
-      { name: "Residential Tanks", price: "₹1 per Litre", highlight: "For Sintex & Overhead RCC tanks" },
-      { name: "Commercial Tanks (10,000L+)", price: "₹0.50 per Litre", highlight: "High pressure Zet Wash Machine" }
+      { name: "500 Litres Overhead Tank", price: "₹499", highlight: "For Sintex / Plastic overhead tanks" },
+      { name: "1,000 Litres Overhead Tank", price: "₹799", highlight: "High pressure jet wash & sludge extraction" },
+      { name: "2,000 Litres Overhead Tank", price: "₹1,299", highlight: "Antibacterial UV sanitization" },
+      { name: "Underground Sump (Up to 5,000L)", price: "₹1,499", highlight: "6-stage Zet Wash machine dewatering & cleaning" },
+      { name: "Underground Sump (5,000L - 10,000L)", price: "₹2,499", highlight: "Deep silt extraction & chemical wash" },
+      { name: "Commercial Water Tanks (10,000L+)", price: "₹0.50 per Litre", highlight: "High pressure Zet Wash machine operation" }
     ]
   },
   {

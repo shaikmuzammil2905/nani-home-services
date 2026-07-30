@@ -35,7 +35,12 @@ const PricingPage = () => {
 
   const filteredServices = activeTab === 'All'
     ? servicesData
-    : servicesData.filter(s => s.shortTitle.toLowerCase().includes(activeTab.toLowerCase().replace(' cleaning', '')) || activeTab.toLowerCase().includes(s.shortTitle.toLowerCase()));
+    : servicesData.filter(s => {
+        const titleLower = s.title.toLowerCase();
+        const shortLower = s.shortTitle.toLowerCase();
+        const tabLower = activeTab.toLowerCase().replace(' cleaning', '');
+        return titleLower.includes(tabLower) || shortLower.includes(tabLower) || tabLower.includes(shortLower) || (tabLower.includes('tank') && (titleLower.includes('tank') || shortLower.includes('tank')));
+      });
 
   return (
     <div className="space-y-12 py-8">
