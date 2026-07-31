@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { initialPortfolio } from '../data/websiteData';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, Maximize2, X } from 'lucide-react';
 import { getStoredGallery } from '../utils/storage';
 
 const Gallery = () => {
-  const [galleryItems] = useState(getStoredGallery());
+  const [galleryItems, setGalleryItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [modalImage, setModalImage] = useState(null);
+
+  useEffect(() => {
+    setGalleryItems(getStoredGallery());
+  }, []);
 
   const categories = [
     'All', 

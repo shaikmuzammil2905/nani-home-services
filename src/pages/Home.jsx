@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, CheckCircle2, Phone, Calendar, ArrowRight, Home as HomeIcon, 
   Utensils, Bath, Droplets, Armchair, Tv, Sparkles, Star, Users, Award, Clock, Layers, Maximize
 } from 'lucide-react';
-import { businessDetails, servicesData, initialPortfolio, statsCounterData, testimonials } from '../data/websiteData';
-import PricingTable from '../components/PricingTable';
+import { businessDetails, statsCounterData } from '../data/websiteData';
+import { getStoredServices, getStoredGallery, getStoredReviews } from '../utils/storage';
 import AnimatedCounter from '../components/AnimatedCounter';
 import InquiryForm from '../components/InquiryForm';
 
 const Home = () => {
+  const [services, setServices] = useState([]);
+  const [portfolio, setPortfolio] = useState([]);
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    setServices(getStoredServices());
+    setPortfolio(getStoredGallery());
+    setReviews(getStoredReviews());
+  }, []);
+
   const serviceIcons = {
     'home-cleaning': HomeIcon,
     'kitchen-cleaning': Utensils,
@@ -24,7 +34,7 @@ const Home = () => {
   return (
     <div className="space-y-16 pb-12">
       
-      {/* HERO BANNER SECTION (Matches image copy 2.png & updated requests) */}
+      {/* HERO BANNER SECTION */}
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-lightBlue/50 via-white to-slate-50 pt-10 pb-16 lg:py-20 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -49,7 +59,7 @@ const Home = () => {
                 We make your home sparkle clean with our professional touch, eco-friendly cleaning solutions, and advanced machine technology.
               </p>
 
-              {/* Animated HD Feature Cards (image copy 8.png & 9.png fit in marked spot) */}
+              {/* Animated Feature Cards */}
               <div className="pt-2 grid grid-cols-2 gap-3 sm:gap-4 max-w-lg">
                 <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl border-2 border-brand-green/40 bg-white hover:border-brand-green transition-all duration-500 transform hover:-translate-y-1">
                   <div className="relative h-28 sm:h-36 overflow-hidden">
@@ -113,7 +123,7 @@ const Home = () => {
 
             </div>
 
-            {/* Right Hero Image & Badge (Matches image copy 2.png) */}
+            {/* Right Hero Image & Badge */}
             <div className="lg:col-span-5 relative flex justify-center">
               
               <div className="relative w-full max-w-lg">
@@ -131,7 +141,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent"></div>
                 </div>
 
-                {/* Floating 100% Satisfaction Badge (Matching UI design) */}
+                {/* Floating 100% Satisfaction Badge */}
                 <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 sm:translate-x-0 sm:left-6 bg-brand-navy text-white px-6 py-3 rounded-2xl shadow-2xl border border-white/20 flex items-center space-x-3 animate-float">
                   <div className="w-12 h-12 rounded-xl bg-brand-green text-white flex items-center justify-center font-extrabold text-lg shadow-inner">
                     100%
@@ -150,7 +160,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* OUR SERVICES SECTION (Matches image copy 2.png & copy 10.png) */}
+      {/* OUR SERVICES SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
@@ -160,9 +170,9 @@ const Home = () => {
           <div className="text-brand-green text-lg font-bold diamond-divider my-1">✦</div>
         </div>
 
-        {/* Services Grid Cards (All Services shown) */}
+        {/* Services Grid Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 sm:gap-5">
-          {servicesData.map((service, index) => {
+          {services.map((service, index) => {
             const IconComp = serviceIcons[service.slug] || HomeIcon;
             return (
               <Link
@@ -174,7 +184,7 @@ const Home = () => {
                   <IconComp className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
                 <h3 className="text-xs sm:text-sm font-extrabold text-brand-navy group-hover:text-brand-green transition-colors leading-snug">
-                  {index + 1}. {service.shortTitle}
+                  {index + 1}. {service.shortTitle || service.title}
                 </h3>
               </Link>
             );
@@ -182,9 +192,7 @@ const Home = () => {
         </div>
       </section>
 
-
-
-      {/* WHY CHOOSE NANI CLEANING SERVICE? (Matches dark navy card in image copy 2.png) */}
+      {/* WHY CHOOSE NANI CLEANING SERVICE? */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#041E42] text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10 relative overflow-hidden">
           
@@ -241,7 +249,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* STATS COUNTER SECTION (Typing mode / Animated counters) */}
+      {/* STATS COUNTER SECTION */}
       <section className="bg-brand-navy py-12 border-y border-white/10 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
@@ -259,7 +267,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* OUR PORTFOLIO SHOWCASE (Matches image copy 2.png) */}
+      {/* OUR PORTFOLIO SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
@@ -270,7 +278,7 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {initialPortfolio.map((item) => (
+          {portfolio.slice(0, 5).map((item) => (
             <div key={item.id} className="group relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white">
               <img 
                 src={item.image} 
@@ -299,7 +307,7 @@ const Home = () => {
 
       </section>
 
-      {/* CALLOUT BANNER (Matches green bar in image copy 2.png) */}
+      {/* CALLOUT BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-brand-green to-emerald-600 rounded-3xl p-6 sm:p-10 shadow-xl text-white flex flex-col md:flex-row items-center justify-between gap-6">
           
@@ -340,10 +348,10 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-          {testimonials.map((rev) => (
+          {reviews.slice(0, 3).map((rev) => (
             <div key={rev.id} className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-4 hover:shadow-lg transition">
               <div className="flex items-center space-x-1 text-amber-400">
-                {[...Array(rev.rating)].map((_, i) => (
+                {[...Array(rev.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>

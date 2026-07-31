@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Layers, Maximize, 
-  CheckCircle2, Phone, Calendar, ArrowRight, ShieldCheck, Sparkles, Tag
+  Phone, ArrowRight, Tag
 } from 'lucide-react';
-import { servicesData, businessDetails } from '../data/websiteData';
+import { businessDetails } from '../data/websiteData';
+import { getStoredServices } from '../utils/storage';
 import PricingTable from '../components/PricingTable';
 
 const PricingPage = () => {
   const [activeTab, setActiveTab] = useState('All');
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    setServices(getStoredServices());
+  }, []);
 
   const categories = [
     'All',
@@ -34,10 +40,10 @@ const PricingPage = () => {
   };
 
   const filteredServices = activeTab === 'All'
-    ? servicesData
-    : servicesData.filter(s => {
+    ? services
+    : services.filter(s => {
         const titleLower = s.title.toLowerCase();
-        const shortLower = s.shortTitle.toLowerCase();
+        const shortLower = (s.shortTitle || s.title).toLowerCase();
         const tabLower = activeTab.toLowerCase().replace(' cleaning', '');
         return titleLower.includes(tabLower) || shortLower.includes(tabLower) || tabLower.includes(shortLower) || (tabLower.includes('tank') && (titleLower.includes('tank') || shortLower.includes('tank')));
       });
@@ -91,7 +97,7 @@ const PricingPage = () => {
                     </div>
                     <div>
                       <span className="text-brand-green text-xs font-extrabold uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-md border border-emerald-100">
-                        {svc.badge}
+                        {svc.badge || 'Active'}
                       </span>
                       <h2 className="text-2xl font-extrabold text-brand-navy font-heading mt-1">
                         {svc.title}

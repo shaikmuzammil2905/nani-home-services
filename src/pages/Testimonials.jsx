@@ -1,8 +1,14 @@
-import React from 'react';
-import { testimonials } from '../data/websiteData';
-import { Star, MessageCircle, Quote } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Star, Quote } from 'lucide-react';
+import { getStoredReviews } from '../utils/storage';
 
 const Testimonials = () => {
+  const [reviewsList, setReviewsList] = useState([]);
+
+  useEffect(() => {
+    setReviewsList(getStoredReviews());
+  }, []);
+
   return (
     <div className="space-y-12 py-8">
       {/* Header */}
@@ -31,7 +37,7 @@ const Testimonials = () => {
               ))}
             </div>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Based on 250+ Verified Google Reviews
+              Based on {reviewsList.length * 50}+ Verified Google Reviews
             </span>
           </div>
         </div>
@@ -40,11 +46,11 @@ const Testimonials = () => {
       {/* Testimonials List */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t) => (
+          {reviewsList.map((t) => (
             <div key={t.id} className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 relative space-y-4 hover:shadow-2xl transition">
-              <Quote className="w-10 h-10 text-brand-lightBlue absolute top-6 right-6" />
+              <Quote className="w-10 h-10 text-brand-lightBlue absolute top-6 right-6 opacity-40" />
               <div className="flex items-center space-x-1 text-amber-400">
-                {[...Array(t.rating)].map((_, i) => (
+                {[...Array(t.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>

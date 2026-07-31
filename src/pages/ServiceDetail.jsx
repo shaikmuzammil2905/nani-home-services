@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { 
   CheckCircle2, Phone, Calendar, ArrowRight, ShieldCheck, Sparkles, MessageCircle, Info 
 } from 'lucide-react';
-import { servicesData, businessDetails } from '../data/websiteData';
+import { businessDetails } from '../data/websiteData';
+import { getStoredServices } from '../utils/storage';
 import PricingTable from '../components/PricingTable';
 import InquiryForm from '../components/InquiryForm';
 
 const ServiceDetail = () => {
   const { slug } = useParams();
-  const service = servicesData.find((s) => s.slug === slug);
+  const [services, setServices] = useState([]);
 
-  if (!service) {
+  useEffect(() => {
+    setServices(getStoredServices());
+  }, []);
+
+  const service = services.find((s) => s.slug === slug);
+
+  if (services.length > 0 && !service) {
     return <Navigate to="/services" replace />;
   }
 
-  const relatedServices = servicesData.filter((s) => s.slug !== slug).slice(0, 3);
+  if (!service) {
+    return null;
+  }
+
+  const relatedServices = services.filter((s) => s.slug !== slug).slice(0, 3);
 
   return (
     <div className="space-y-12 py-8">
@@ -27,7 +38,7 @@ const ServiceDetail = () => {
         </div>
         <div className="relative max-w-5xl mx-auto text-center space-y-4">
           <span className="inline-block bg-brand-green text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider shadow">
-            {service.badge}
+            {service.badge || 'Professional Service'}
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-heading">
             {service.title}
@@ -82,34 +93,38 @@ const ServiceDetail = () => {
             </div>
 
             {/* Key Features */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-brand-navy font-heading">
-                What's Included in {service.shortTitle}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {service.features.map((feat, idx) => (
-                  <div key={idx} className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3 text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
-                    <span className="font-semibold text-slate-800">{feat}</span>
-                  </div>
-                ))}
+            {service.features && service.features.length > 0 && (
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-brand-navy font-heading">
+                  What's Included in {service.shortTitle || service.title}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {service.features.map((feat, idx) => (
+                    <div key={idx} className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3 text-sm">
+                      <CheckCircle2 className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
+                      <span className="font-semibold text-slate-800">{feat}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Benefits */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-brand-navy font-heading">
-                Key Benefits
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {service.benefits.map((ben, idx) => (
-                  <div key={idx} className="bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-100 flex items-start space-x-3 text-sm">
-                    <Sparkles className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
-                    <span className="font-semibold text-slate-800">{ben}</span>
-                  </div>
-                ))}
+            {service.benefits && service.benefits.length > 0 && (
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-brand-navy font-heading">
+                  Key Benefits
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {service.benefits.map((ben, idx) => (
+                    <div key={idx} className="bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-100 flex items-start space-x-3 text-sm">
+                      <Sparkles className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
+                      <span className="font-semibold text-slate-800">{ben}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
           </div>
 
@@ -179,7 +194,7 @@ const ServiceDetail = () => {
               )}
 
               {/* Notes Disclaimer */}
-              {service.notes && (
+              {service.notes && service.notes.length > 0 && (
                 <div className="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs text-amber-800 space-y-1">
                   <div className="font-bold flex items-center space-x-1">
                     <Info className="w-3.5 h-3.5" />
@@ -213,7 +228,7 @@ const ServiceDetail = () => {
             <Link key={rel.id} to={`/services/${rel.slug}`} className="bg-white p-5 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl transition group flex items-center space-x-4">
               <img src={rel.heroImage} alt={rel.title} className="w-20 h-20 rounded-xl object-cover" />
               <div>
-                <h4 className="font-bold text-brand-navy group-hover:text-brand-green transition-colors text-sm">{rel.shortTitle}</h4>
+                <h4 className="font-bold text-brand-navy group-hover:text-brand-green transition-colors text-sm">{rel.shortTitle || rel.title}</h4>
                 <p className="text-xs text-slate-500 line-clamp-2 mt-1">{rel.description}</p>
               </div>
             </Link>

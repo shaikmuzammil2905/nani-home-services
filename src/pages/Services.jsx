@@ -1,11 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Maximize, Layers, ArrowRight, Check 
 } from 'lucide-react';
-import { servicesData } from '../data/websiteData';
+import { getStoredServices } from '../utils/storage';
 
 const Services = () => {
+  const [services, setServices] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    setServices(getStoredServices());
+  }, []);
+
+  const searchParams = new URLSearchParams(location.search);
+  const searchFilter = searchParams.get('search')?.toLowerCase();
+
+  const displayedServices = searchFilter 
+    ? services.filter(s => s.title.toLowerCase().includes(searchFilter) || s.description.toLowerCase().includes(searchFilter))
+    : services;
+
   const iconMap = {
     'home-cleaning': HomeIcon,
     'kitchen-cleaning': Utensils,
@@ -37,7 +51,7 @@ const Services = () => {
       {/* Services Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesData.map((svc) => {
+          {displayedServices.map((svc) => {
             const IconComponent = iconMap[svc.slug] || HomeIcon;
             return (
               <div key={svc.id} className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
@@ -49,13 +63,13 @@ const Services = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
                     <span className="absolute top-4 right-4 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                      {svc.badge}
+                      {svc.badge || 'Active'}
                     </span>
                   </div>
 
                   <div className="p-6 space-y-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-xl bg-brand-lightBlue text-brand-royalBlue flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-brand-lightBlue text-brand-royalBlue flex items-center justify-center shrink-0">
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <h3 className="text-xl font-extrabold text-brand-navy font-heading">
@@ -68,7 +82,7 @@ const Services = () => {
                     </p>
 
                     <div className="space-y-1.5 pt-2">
-                      {svc.features.slice(0, 3).map((f, i) => (
+                      {svc.features?.slice(0, 3).map((f, i) => (
                         <div key={i} className="flex items-center space-x-2 text-xs font-medium text-slate-700">
                           <Check className="w-3.5 h-3.5 text-brand-green shrink-0" />
                           <span className="truncate">{f}</span>
