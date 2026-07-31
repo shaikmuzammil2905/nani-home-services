@@ -33,11 +33,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'Portfolio', path: '/gallery' },
-    { name: 'Reviews', path: '/testimonials' },
+    { name: 'Women\'s Collection', path: '/collections/women' },
+    { name: 'Kids Collection', path: '/collections/kids' },
+    { name: 'Retail Collection', path: '/collections/retail' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -117,12 +115,10 @@ const Navbar = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center group">
-              <div className="bg-white px-3 py-1.5 rounded-xl shadow-md border border-white/20 transition-transform group-hover:scale-105">
-                <img 
-                  src="/assets/logo.png" 
-                  alt="NANI CLEANING SERVICES" 
-                  className="h-10 sm:h-12 w-auto object-contain max-w-[180px]"
-                />
+              <div className="bg-white px-4 py-2 rounded-xl shadow-md border border-white/20 transition-transform group-hover:scale-105">
+                <span className="text-xl sm:text-2xl font-extrabold text-brand-navy tracking-tight font-heading">
+                  SB <span className="text-brand-royalBlue">Fashions</span>
+                </span>
               </div>
             </Link>
 
