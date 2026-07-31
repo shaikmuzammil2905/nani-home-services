@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Heart, Eye, Star } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
@@ -26,12 +27,14 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Product Image */}
-        <img 
-          src={product.image} 
-          alt={product.name}
-          loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+        <Link to={`/product/${product.id}`} className="block w-full h-full">
+          <img 
+            src={product.image} 
+            alt={product.name}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </Link>
 
         {/* Quick Add To Cart Button on Hover */}
         <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
@@ -55,9 +58,11 @@ const ProductCard = ({ product }) => {
           <span className="text-xs text-slate-500 ml-1">({product.reviews})</span>
         </div>
         
-        <h3 className="font-semibold text-slate-800 text-sm md:text-base mb-2 line-clamp-2 hover:text-brand-royalBlue cursor-pointer transition-colors">
-          {product.name}
-        </h3>
+        <Link to={`/product/${product.id}`}>
+          <h3 className="font-semibold text-slate-800 text-sm md:text-base mb-2 line-clamp-2 hover:text-brand-royalBlue cursor-pointer transition-colors">
+            {product.name}
+          </h3>
+        </Link>
         
         <div className="mt-auto flex items-center justify-between">
           <div className="flex flex-col">

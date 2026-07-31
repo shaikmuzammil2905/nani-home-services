@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import WomensCollection from './pages/WomensCollection';
 import KidsCollection from './pages/KidsCollection';
 import RetailCollection from './pages/RetailCollection';
+import ProductDetail from './pages/ProductDetail';
 import Contact from './pages/Contact';
 import { initStorage } from './utils/storage';
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="/collections/women" element={<WomensCollection />} />
               <Route path="/collections/kids" element={<KidsCollection />} />
               <Route path="/collections/retail" element={<RetailCollection />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
