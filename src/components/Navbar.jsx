@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Phone, Mail, MapPin, Menu, X, Calendar, Search, ShieldCheck, ChevronRight, ArrowRight } from 'lucide-react';
 import { businessDetails, servicesData } from '../data/websiteData';
 
-const Navbar = () => {
+const Navbar = ({ onOpenBooking, onOpenPromo }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -96,6 +96,14 @@ const Navbar = () => {
                 <MapPin className="w-3.5 h-3.5 text-red-400" />
                 <span>Currency Nagar, Vijayawada</span>
               </span>
+              {onOpenPromo && (
+                <button
+                  onClick={onOpenPromo}
+                  className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 px-2.5 py-1 rounded-md text-xs font-bold border border-amber-500/40 flex items-center space-x-1 transition animate-pulse"
+                >
+                  <span>🔥 20% OFF Offer</span>
+                </button>
+              )}
               <button 
                 onClick={() => setSearchOpen(true)}
                 className="text-slate-300 hover:text-brand-green flex items-center space-x-1 transition text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md"
@@ -152,13 +160,13 @@ const Navbar = () => {
               >
                 <Search className="w-4 h-4" />
               </button>
-              <Link
-                to="/contact"
-                className="bg-brand-green hover:bg-emerald-600 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg hover:shadow-glow-green transition-all duration-300 transform hover:-translate-y-0.5 flex items-center space-x-2"
+              <button
+                onClick={() => onOpenBooking && onOpenBooking('')}
+                className="bg-brand-green hover:bg-emerald-600 text-white text-sm font-extrabold px-5 py-2.5 rounded-full shadow-lg hover:shadow-glow-green transition-all duration-300 transform hover:-translate-y-0.5 flex items-center space-x-2 cursor-pointer uppercase tracking-wider"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Now</span>
-              </Link>
+              </button>
             </div>
 
             {/* Mobile Actions */}
@@ -170,12 +178,12 @@ const Navbar = () => {
               >
                 <Search className="w-5 h-5 text-brand-green" />
               </button>
-              <Link
-                to="/contact"
-                className="bg-brand-green text-white text-xs font-bold px-3 py-1.5 rounded-full shadow"
+              <button
+                onClick={() => onOpenBooking && onOpenBooking('')}
+                className="bg-brand-green text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow uppercase"
               >
                 Book Now
-              </Link>
+              </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-white p-2 rounded-lg bg-white/10 hover:bg-white/20 focus:outline-none"

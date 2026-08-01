@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
-  Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Maximize, Layers, ArrowRight, Check 
+  Home as HomeIcon, Utensils, Bath, Droplets, Armchair, Tv, Maximize, Layers, ArrowRight, Check, Calendar 
 } from 'lucide-react';
 import { getStoredServices } from '../utils/storage';
+import AnimatedCounter from '../components/AnimatedCounter';
 
-const Services = () => {
+const fadeInUp = {
+  initial: { opacity: 0, y: 35 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.15 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const Services = ({ onOpenBooking }) => {
   const [services, setServices] = useState([]);
   const location = useLocation();
 
@@ -32,11 +41,16 @@ const Services = () => {
   };
 
   return (
-    <div className="space-y-12 py-8">
+    <div className="space-y-12 py-8 overflow-x-hidden">
       {/* Banner */}
-      <section className="bg-brand-navy text-white py-16 px-4 text-center">
-        <div className="max-w-4xl mx-auto space-y-4">
-          <span className="text-brand-green font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full">
+      <motion.section 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-brand-navy text-white py-16 px-4 text-center relative overflow-hidden"
+      >
+        <div className="max-w-4xl mx-auto space-y-4 relative z-10">
+          <span className="text-brand-green font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
             OUR SPECIALIZED CLEANING SERVICES
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold font-heading">
@@ -45,16 +59,63 @@ const Services = () => {
           <p className="text-slate-300 text-base max-w-2xl mx-auto">
             Choose from our wide array of home, kitchen, bathroom, tank, sofa, appliance, and window cleaning solutions.
           </p>
+
+          <div className="pt-2">
+            <button
+              onClick={() => onOpenBooking && onOpenBooking('')}
+              className="bg-brand-green hover:bg-emerald-600 text-white font-extrabold px-6 py-3 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-glow-green transition-all inline-flex items-center space-x-2 cursor-pointer"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Instant Booking Pop-up</span>
+            </button>
+          </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Animated Counter Stats Bar */}
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-brand-navy via-[#031B4E] to-brand-royalBlue text-white p-6 rounded-3xl shadow-xl border border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-brand-green font-heading">
+              <AnimatedCounter target={8} suffix="+" duration={1800} />
+            </div>
+            <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider mt-1">Specialized Services</div>
+          </div>
+          <div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-blue-400 font-heading">
+              <AnimatedCounter target={100} suffix="%" duration={1800} />
+            </div>
+            <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider mt-1">Eco-Friendly Safe</div>
+          </div>
+          <div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-amber-400 font-heading">
+              <AnimatedCounter target={4.9} decimals={1} suffix="★" duration={1800} />
+            </div>
+            <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider mt-1">Average Review</div>
+          </div>
+          <div>
+            <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-heading">
+              <AnimatedCounter target={5000} suffix="+" duration={2200} />
+            </div>
+            <div className="text-xs font-semibold text-slate-300 uppercase tracking-wider mt-1">Satisfied Homes</div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Services Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedServices.map((svc) => {
+          {displayedServices.map((svc, idx) => {
             const IconComponent = iconMap[svc.slug] || HomeIcon;
             return (
-              <div key={svc.id} className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+              <motion.div 
+                key={svc.id} 
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition duration-300 group"
+              >
                 <div>
                   <div className="relative h-48 overflow-hidden">
                     <img 
@@ -92,22 +153,31 @@ const Services = () => {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0">
+                <div className="p-6 pt-0 space-y-2">
+                  <button
+                    onClick={() => onOpenBooking && onOpenBooking(svc.title)}
+                    className="w-full bg-brand-navy hover:bg-brand-royalBlue text-white font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center space-x-2 text-xs uppercase tracking-wider shadow"
+                  >
+                    <Calendar className="w-4 h-4 text-brand-green" />
+                    <span>Quick Booking Pop-up</span>
+                  </button>
+
                   <Link
                     to={`/services/${svc.slug}`}
-                    className="w-full bg-slate-50 hover:bg-brand-navy text-brand-navy hover:text-white font-bold py-3 px-4 rounded-xl border border-slate-200 transition-all flex items-center justify-center space-x-2 text-sm"
+                    className="w-full bg-slate-50 hover:bg-slate-100 text-brand-navy font-bold py-2.5 px-4 rounded-xl border border-slate-200 transition-all flex items-center justify-center space-x-2 text-xs uppercase tracking-wider"
                   >
                     <span>View Pricing & Details</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };
 
 export default Services;
+

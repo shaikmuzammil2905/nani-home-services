@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PageLoader from './components/PageLoader';
 import FloatingActions from './components/FloatingActions';
+import QuickBookingModal from './components/QuickBookingModal';
+import PromoPopup from './components/PromoPopup';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -19,10 +21,27 @@ import { initStorage } from './utils/storage';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
+  const [isPromoOpen, setIsPromoOpen] = useState(false);
 
   useEffect(() => {
     initStorage();
   }, []);
+
+  const handleOpenBooking = (serviceName = '') => {
+    setSelectedService(serviceName);
+    setIsBookingOpen(true);
+  };
+
+  const handleCloseBooking = () => {
+    setIsBookingOpen(false);
+    setSelectedService('');
+  };
+
+  const handleOpenPromo = () => {
+    setIsPromoOpen(true);
+  };
 
   return (
     <Router>
@@ -30,17 +49,20 @@ function App() {
       
       <div className="min-h-screen flex flex-col justify-between bg-slate-50 selection:bg-brand-royalBlue selection:text-white">
         <div>
-          <Navbar />
+          <Navbar 
+            onOpenBooking={handleOpenBooking} 
+            onOpenPromo={handleOpenPromo} 
+          />
           <main>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/:slug" element={<ServiceDetail />} />
-              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/" element={<Home onOpenBooking={handleOpenBooking} />} />
+              <Route path="/about" element={<About onOpenBooking={handleOpenBooking} />} />
+              <Route path="/services" element={<Services onOpenBooking={handleOpenBooking} />} />
+              <Route path="/services/:slug" element={<ServiceDetail onOpenBooking={handleOpenBooking} />} />
+              <Route path="/pricing" element={<PricingPage onOpenBooking={handleOpenBooking} />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/team" element={<Team />} />
-              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/testimonials" element={<Testimonials onOpenBooking={handleOpenBooking} />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin" element={<Admin />} />
@@ -49,11 +71,28 @@ function App() {
           </main>
         </div>
         
-        <Footer />
-        <FloatingActions />
+        <Footer onOpenBooking={handleOpenBooking} />
+        
+        <FloatingActions 
+          onOpenBooking={handleOpenBooking}
+          onOpenPromo={handleOpenPromo}
+        />
+
+        {/* Global Pop-up Modals */}
+        <QuickBookingModal 
+          isOpen={isBookingOpen}
+          onClose={handleCloseBooking}
+          defaultService={selectedService}
+        />
+
+        <PromoPopup 
+          key={isPromoOpen ? 'open' : 'closed'}
+          onOpenBooking={() => handleOpenBooking('')}
+        />
       </div>
     </Router>
   );
 }
 
 export default App;
+

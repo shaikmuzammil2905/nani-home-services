@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
   ShieldCheck, CheckCircle2, Phone, Calendar, ArrowRight, Home as HomeIcon, 
-  Utensils, Bath, Droplets, Armchair, Tv, Sparkles, Star, Users, Award, Clock, Layers, Maximize
+  Utensils, Bath, Droplets, Armchair, Tv, Sparkles, Star, Users, Award, Clock, Layers, Maximize, Gift
 } from 'lucide-react';
 import { businessDetails, statsCounterData } from '../data/websiteData';
 import { getStoredServices, getStoredGallery, getStoredReviews } from '../utils/storage';
 import AnimatedCounter from '../components/AnimatedCounter';
 import InquiryForm from '../components/InquiryForm';
 
-const Home = () => {
+const fadeInUp = {
+  initial: { opacity: 0, y: 35 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.15 },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: { transition: { staggerChildren: 0.1 } }
+};
+
+const Home = ({ onOpenBooking }) => {
   const [services, setServices] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -32,7 +45,7 @@ const Home = () => {
   };
 
   return (
-    <div className="space-y-16 pb-12">
+    <div className="space-y-16 pb-12 overflow-x-hidden">
       
       {/* HERO BANNER SECTION */}
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-lightBlue/50 via-white to-slate-50 pt-10 pb-16 lg:py-20 border-b border-slate-100">
@@ -40,11 +53,16 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Hero Content */}
-            <div className="lg:col-span-7 space-y-6 text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="lg:col-span-7 space-y-6 text-left"
+            >
               
-              <div className="inline-flex items-center space-x-2 bg-emerald-100/80 text-brand-green px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider border border-emerald-200">
+              <div className="inline-flex items-center space-x-2 bg-emerald-100/80 text-brand-green px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider border border-emerald-200 shadow-sm">
                 <Sparkles className="w-4 h-4 text-brand-green animate-spin" />
-                <span>PROFESSIONAL</span>
+                <span>PROFESSIONAL CLEANING SERVICES</span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight font-heading">
@@ -102,13 +120,13 @@ const Home = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4 pt-4">
-                <Link
-                  to="/contact"
-                  className="bg-brand-navy hover:bg-brand-royalBlue text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg hover:shadow-glow-blue transition-all duration-300 transform hover:-translate-y-0.5 flex items-center space-x-2 text-sm uppercase tracking-wider"
+                <button
+                  onClick={() => onOpenBooking && onOpenBooking('')}
+                  className="bg-brand-navy hover:bg-brand-royalBlue text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg hover:shadow-glow-blue transition-all duration-300 transform hover:-translate-y-0.5 flex items-center space-x-2 text-sm uppercase tracking-wider cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>BOOK NOW</span>
-                </Link>
+                  <Calendar className="w-4 h-4 text-brand-green" />
+                  <span>BOOK NOW (POP-UP)</span>
+                </button>
 
                 <a
                   href={`https://wa.me/${businessDetails.whatsappClean}?text=${encodeURIComponent('Hello NANI CLEANING SERVICES. I want a free quote for cleaning services.')}`}
@@ -121,7 +139,7 @@ const Home = () => {
                 </a>
               </div>
 
-            </div>
+            </motion.div>
 
             {/* Right Hero Image & Badge */}
             <div className="lg:col-span-5 relative flex justify-center">
@@ -161,7 +179,7 @@ const Home = () => {
       </section>
 
       {/* OUR SERVICES SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-navy font-heading uppercase tracking-wide">
@@ -175,25 +193,32 @@ const Home = () => {
           {services.map((service, index) => {
             const IconComp = serviceIcons[service.slug] || HomeIcon;
             return (
-              <Link
+              <motion.div
                 key={service.id}
-                to={`/services/${service.slug}`}
-                className="group bg-white rounded-2xl p-4 sm:p-5 shadow-md hover:shadow-card-hover border border-slate-100 hover:border-brand-green/40 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center justify-between"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
               >
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-lightBlue group-hover:bg-brand-green text-brand-royalBlue group-hover:text-white flex items-center justify-center transition-all duration-300 mb-3 shadow-sm">
-                  <IconComp className="w-7 h-7 sm:w-8 sm:h-8" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-brand-navy group-hover:text-brand-green transition-colors leading-snug">
-                  {index + 1}. {service.shortTitle || service.title}
-                </h3>
-              </Link>
+                <Link
+                  to={`/services/${service.slug}`}
+                  className="group bg-white rounded-2xl p-4 sm:p-5 shadow-md hover:shadow-card-hover border border-slate-100 hover:border-brand-green/40 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center justify-between h-full"
+                >
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-lightBlue group-hover:bg-brand-green text-brand-royalBlue group-hover:text-white flex items-center justify-center transition-all duration-300 mb-3 shadow-sm">
+                    <IconComp className="w-7 h-7 sm:w-8 sm:h-8" />
+                  </div>
+                  <h3 className="text-xs sm:text-sm font-extrabold text-brand-navy group-hover:text-brand-green transition-colors leading-snug">
+                    {index + 1}. {service.shortTitle || service.title}
+                  </h3>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
       {/* WHY CHOOSE NANI CLEANING SERVICE? */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#041E42] text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10 relative overflow-hidden">
           
           <div className="text-center mb-10">
@@ -247,28 +272,35 @@ const Home = () => {
           </div>
 
         </div>
-      </section>
+      </motion.section>
 
-      {/* STATS COUNTER SECTION */}
-      <section className="bg-brand-navy py-12 border-y border-white/10 text-white">
+      {/* STATS COUNTER SECTION (NUMBERS IN COUNTING MODE) */}
+      <motion.section {...fadeInUp} className="bg-brand-navy py-12 border-y border-white/10 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {statsCounterData.map((stat, idx) => (
-              <div key={idx} className="space-y-2">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="space-y-2 bg-white/5 p-6 rounded-2xl border border-white/10 hover:border-brand-green/50 transition-colors"
+              >
                 <div className="text-3xl sm:text-5xl font-extrabold text-brand-green font-heading">
-                  <AnimatedCounter target={stat.count} suffix={stat.suffix} />
+                  <AnimatedCounter target={stat.count} suffix={stat.suffix} duration={2200} />
                 </div>
                 <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300">
                   {stat.label}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* OUR PORTFOLIO SHOWCASE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
           <h2 className="text-3xl font-extrabold text-brand-navy font-heading uppercase tracking-wide">
@@ -278,8 +310,15 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {portfolio.slice(0, 5).map((item) => (
-            <div key={item.id} className="group relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white">
+          {portfolio.slice(0, 5).map((item, idx) => (
+            <motion.div 
+              key={item.id} 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="group relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-white"
+            >
               <img 
                 src={item.image} 
                 alt={item.title} 
@@ -291,7 +330,7 @@ const Home = () => {
                   {item.title}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -305,10 +344,10 @@ const Home = () => {
           </Link>
         </div>
 
-      </section>
+      </motion.section>
 
-      {/* CALLOUT BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* CALLOUT BANNER WITH POP-UP BUTTON */}
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-brand-green to-emerald-600 rounded-3xl p-6 sm:p-10 shadow-xl text-white flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex items-center space-x-4 text-left">
@@ -325,20 +364,28 @@ const Home = () => {
             </div>
           </div>
 
-          <a
-            href={`https://wa.me/${businessDetails.whatsappClean}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-brand-navy hover:bg-[#020D26] text-white font-extrabold px-8 py-3.5 rounded-full shadow-lg hover:shadow-2xl transition-all whitespace-nowrap text-sm uppercase tracking-wider"
-          >
-            CALL & WHATSAPP
-          </a>
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={() => onOpenBooking && onOpenBooking('')}
+              className="bg-white text-brand-navy hover:bg-slate-100 font-extrabold px-6 py-3.5 rounded-full shadow-lg transition-all text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+            >
+              Instant Booking Pop-up
+            </button>
+            <a
+              href={`https://wa.me/${businessDetails.whatsappClean}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-brand-navy hover:bg-[#020D26] text-white font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-2xl transition-all whitespace-nowrap text-xs sm:text-sm uppercase tracking-wider"
+            >
+              CALL & WHATSAPP
+            </a>
+          </div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* CUSTOMER REVIEWS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <motion.section {...fadeInUp} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         <div className="inline-block mb-8">
           <h2 className="text-3xl font-extrabold text-brand-navy font-heading uppercase tracking-wide">
@@ -348,8 +395,15 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-          {reviews.slice(0, 3).map((rev) => (
-            <div key={rev.id} className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-4 hover:shadow-lg transition">
+          {reviews.slice(0, 3).map((rev, idx) => (
+            <motion.div 
+              key={rev.id} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-4 hover:shadow-lg transition"
+            >
               <div className="flex items-center space-x-1 text-amber-400">
                 {[...Array(rev.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
@@ -363,19 +417,20 @@ const Home = () => {
                 </div>
                 <span className="text-slate-400">{rev.date}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-      </section>
+      </motion.section>
 
       {/* INQUIRY FORM SECTION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.section {...fadeInUp} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <InquiryForm />
-      </section>
+      </motion.section>
 
     </div>
   );
 };
 
 export default Home;
+
